@@ -17,6 +17,11 @@ app.listen(port, () => {
 	main()
 })
 
+async function main(){
+	await downloadFile('http://www.cbr.ru/s/newbik', path.resolve() + `/saved/BIC.zip`)
+	await unzipp()
+	
+}
 
 async function unzipp(){
 	var zip = new AdmZip(path.resolve() + `/saved/BIC.zip`)
@@ -25,19 +30,6 @@ async function unzipp(){
 	zip.extractAllTo(/*target path*/ path.resolve() + '/unzipped', /*overwrite*/ true);
 
 }
-
-
-
-
-async function main(){
-	await downloadFile('http://www.cbr.ru/s/newbik', path.resolve() + `/saved/BIC.zip`)
-	await unzipp()
-}
-
-
-
-
-
 
 const downloadFile = (async (url, path) => {
   const res = await fetch(url);
